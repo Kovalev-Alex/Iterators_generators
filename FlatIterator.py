@@ -9,7 +9,8 @@ class FlatIterator:
         return self
 
     def __next__(self):
-        if self.count == len(self.list_of_list):
+
+        if self.count == len(self.list_of_list) - 1 and self.internal_count == len(self.list_of_list[-1]):
             raise StopIteration
         else:
             len_internal_list = len(self.list_of_list[self.count])
@@ -34,9 +35,9 @@ def test_1():
     for flat_iterator_item, check_item in zip(
             FlatIterator(list_of_lists_1),
             ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]):
-        print(f'flat: {flat_iterator_item}, check: {check_item}')
 
         assert flat_iterator_item == check_item
+
     assert list(FlatIterator(list_of_lists_1)) == ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
 
 
